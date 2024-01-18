@@ -13,10 +13,13 @@
         "inertiajs/inertia-laravel": "^0.6.11",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
+        "laravel/telescope": "^4.17",
         "laravel/tinker": "^2.8"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.9",
         "fakerphp/faker": "^1.9.1",
+        "larastan/larastan": "^2.0",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
@@ -53,6 +56,9 @@
         "format": [
             "./vendor/bin/pint",
             "npm run lint"
+        ],
+        "analyze": [
+            "./vendor/bin/phpstan analyse"
         ]
     },
     "extra": {
