@@ -12,4 +12,11 @@ module.exports = {
         semi: ["error", "never"],
         "vue/multi-word-component-names": "off",
     },
+    globals: {
+        __: "readonly",
+        route: "readonly",
+        axios: "readonly",
+        document: "readonly",
+        window: "readonly",
+    },
 };

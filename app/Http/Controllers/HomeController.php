@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
+
 class HomeController extends Controller
 {
     public function __invoke()
     {
-        return inertia('Home');
+        return inertia('Welcome', [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+            'laravelVersion' => Application::VERSION,
+            'phpVersion' => PHP_VERSION,
+        ]);
     }
 }
