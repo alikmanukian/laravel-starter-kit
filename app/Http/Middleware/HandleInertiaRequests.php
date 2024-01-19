@@ -45,6 +45,7 @@ class HandleInertiaRequests extends Middleware
                 'features' => collect(config('fortify.features'))
                     ->mapWithKeys(fn ($key) => [$key => true]),
             ],
+            'toast' => session('toast')
         ]);
     }
 }
