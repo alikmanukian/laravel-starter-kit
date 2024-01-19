@@ -9,11 +9,9 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        return inertia('Welcome', [
+        return inertia('Home', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
-            'laravelVersion' => Application::VERSION,
-            'phpVersion' => PHP_VERSION,
         ]);
     }
 }

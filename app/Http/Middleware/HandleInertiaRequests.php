@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Laravel\Fortify\Features;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -38,6 +40,11 @@ class HandleInertiaRequests extends Middleware
                 'app.name',
                 'app.locale',
             ]),
+            'auth' => [
+                'user' => $request->user() ? UserResource::make($request->user()) : null,
+                'features' => collect(config('fortify.features'))
+                    ->mapWithKeys(fn ($key) => [$key => true]),
+            ],
         ]);
     }
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { Head } from '@inertiajs/vue3'
+import { Head, Link } from '@inertiajs/vue3'
 import Layout from '@/Layouts/Default.vue'
 
 defineOptions({ layout: Layout })
@@ -8,6 +8,20 @@ defineOptions({ layout: Layout })
 <template>
     <Head title="Starter Kit" />
     <div class="max-w-5xl mx-auto p-8">
-        <h1>Home</h1>
+        <div class="space-y-4 w-60">
+            <Link
+                :href="route('modal', { type: 'HeadlessUIModal' })"
+                class="bg-slate-600 text-white rounded px-4 py-2 block text-center"
+            >
+                Open HeadlessUI Modal
+            </Link>
+
+            <Link
+                :href="route('modal', { type: 'HeadlessUIDialog' })"
+                class="bg-orange-600 text-white rounded px-4 py-2 block text-center"
+            >
+                Open HeadlessUI Dialog
+            </Link>
+        </div>
     </div>
 </template>

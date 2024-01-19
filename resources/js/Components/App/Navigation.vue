@@ -1,5 +1,5 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, router } from '@inertiajs/vue3'
 import {
     Disclosure,
     DisclosureButton,
@@ -26,30 +26,32 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
                     <div class="flex justify-between w-full">
                         <div class="hidden sm:flex sm:ml-6 space-x-8">
                             <Link
-                                href="#"
+                                :href="route('home')"
                                 class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900"
                             >
                                 Home
                             </Link>
                             <Link
-                                href="#"
+                                :href="route('dashboard')"
                                 class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900"
                             >
                                 Dashboard
                             </Link>
                         </div>
+
                         <div
-                            v-if="false"
+                            v-if="!$page.props.auth.user"
                             class="hidden sm:flex sm:ml-6 space-x-8"
                         >
                             <Link
-                                href="#"
+                                v-if="$page.props.auth.features.registration"
+                                :href="route('register')"
                                 class="inline-flex items-center border-b-2 border-transparent text-sm font-medium text-gray-900"
                             >
                                 Create an account
                             </Link>
                             <Link
-                                href="#"
+                                :href="route('login')"
                                 class="inline-flex items-center border-b-2 border-transparent text-sm font-medium text-gray-900"
                             >
                                 Sign In
@@ -58,12 +60,16 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
                     </div>
                 </div>
 
-                <div
-                    class="absolute inset-y-0 right-0 flex items-center space-x-3"
-                >
-                    <Menu as="ul" class="relative mr-3">
+                <div class="inset-y-0 right-0 flex items-center space-x-3 ml-4">
+                    <Menu
+                        v-if="$page.props.auth.user"
+                        as="ul"
+                        class="relative mr-1"
+                    >
                         <MenuButton class="flex items-center text-sm space-x-3">
-                            <span class="font-medium text-gray-900">Alex</span>
+                            <span class="font-medium text-gray-900 text-right">
+                                {{ $page.props.auth.user.name }}
+                            </span>
                             <img
                                 src="https://ui-avatars.com/api/?name=Alex"
                                 alt="Avatar"
@@ -95,15 +101,16 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
                                 </Link>
                             </MenuItem>
 
-                            <MenuItem v-slot="{ active, close }">
-                                <Link
-                                    href="#"
-                                    class="block px-4 py-2 text-sm text-gray-900"
+                            <MenuItem v-slot="{ active }">
+                                <button
+                                    class="block px-4 py-2 text-sm text-gray-900 w-full text-left"
                                     :class="{ 'bg-gray-100': active }"
-                                    @mouseup="close"
+                                    @click.prevent="
+                                        router.post(route('logout'))
+                                    "
                                 >
                                     Sign out
-                                </Link>
+                                </button>
                             </MenuItem>
                         </MenuItems>
                     </Menu>
@@ -120,27 +127,28 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
         <DisclosurePanel class="sm:hidden">
             <div class="space-y-1 pb-3">
                 <Link
-                    href="#"
+                    :href="route('home')"
                     class="block py-2 px-8 font-medium text-gray-900"
                 >
                     Home
                 </Link>
                 <Link
-                    href="#"
+                    :href="route('dashboard')"
                     class="block py-2 px-8 font-medium text-gray-900"
                 >
                     Dashboard
                 </Link>
             </div>
-            <div class="space-y-1 pb-3">
+            <div v-if="!$page.props.auth.user" class="space-y-1 pb-3">
                 <Link
-                    href="#"
+                    v-if="$page.props.auth.features.registration"
+                    :href="route('register')"
                     class="block py-2 px-8 font-medium text-gray-900"
                 >
                     Create an account
                 </Link>
                 <Link
-                    href="#"
+                    :href="route('login')"
                     class="block py-2 px-8 font-medium text-gray-900"
                 >
                     Sign In
