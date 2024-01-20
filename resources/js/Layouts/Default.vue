@@ -1,7 +1,5 @@
 <script setup>
 import Navigation from '@/Components/App/Navigation.vue'
-import { Modal } from 'momentum-modal'
-import Toast from '@/Components/Common/Toast.vue'
 </script>
 
 <template>
@@ -10,9 +8,5 @@ import Toast from '@/Components/Common/Toast.vue'
         <div>
             <slot />
         </div>
-
-        <Modal />
     </div>
-
-    <Toast />
 </template>

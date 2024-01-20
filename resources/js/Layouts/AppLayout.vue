@@ -7,7 +7,6 @@ import Dropdown from '@/Components/Common/Dropdown.vue'
 import DropdownLink from '@/Components/Common/DropdownLink.vue'
 import NavLink from '@/Components/App/NavLink.vue'
 import ResponsiveNavLink from '@/Components/App/ResponsiveNavLink.vue'
-import { Modal } from 'momentum-modal'
 
 defineProps({
     title: {
@@ -510,7 +509,5 @@ const logout = () => {
                 <slot />
             </main>
         </div>
-
-        <Modal />
     </div>
 </template>

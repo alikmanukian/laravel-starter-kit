@@ -1,8 +1,9 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3'
-import Layout from '@/Layouts/Default.vue'
+import Blank from '@/Layouts/Blank.vue'
+import Default from '@/Layouts/Default.vue'
 
-defineOptions({ layout: Layout })
+defineOptions({ layout: [Blank, Default] })
 </script>
 
 <template>
