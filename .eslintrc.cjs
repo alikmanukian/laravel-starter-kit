@@ -16,6 +16,7 @@ module.exports = {
         __: "readonly",
         route: "readonly",
         axios: "readonly",
+        recaptcha: "readonly",
         document: "readonly",
         window: "readonly",
     },

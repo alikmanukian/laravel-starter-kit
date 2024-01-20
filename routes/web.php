@@ -17,3 +17,5 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 });
+
+require __DIR__.'/fortify.php';
