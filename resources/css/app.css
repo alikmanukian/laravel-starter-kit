@@ -6,6 +6,7 @@
     display: none;
 }
 
+/*hide recaptcha badge*/
 .grecaptcha-badge {
     visibility: hidden !important;
 }

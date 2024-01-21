@@ -84,7 +84,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
                                     href="#"
                                     class="block px-4 py-2 text-sm text-gray-900"
                                     :class="{ 'bg-gray-100': active }"
-                                    @mouseup="close"
+                                    :on-success="close"
                                 >
                                     Account
                                 </Link>
@@ -95,7 +95,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
                                     href="#"
                                     class="block px-4 py-2 text-sm text-gray-900"
                                     :class="{ 'bg-gray-100': active }"
-                                    @mouseup="close"
+                                    :on-success="close"
                                 >
                                     Security
                                 </Link>

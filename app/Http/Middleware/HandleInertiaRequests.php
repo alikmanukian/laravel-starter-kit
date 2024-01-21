@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -38,9 +39,6 @@ class HandleInertiaRequests extends Middleware
             'config' => config()->get([
                 'app.name',
                 'app.locale',
-                'services.recaptcha.enabled',
-                'services.recaptcha.key',
-                'services.recaptcha.score',
             ]),
             'auth' => [
                 'user' => $request->user() ? UserResource::make($request->user()) : null,
@@ -48,6 +46,9 @@ class HandleInertiaRequests extends Middleware
                     ->mapWithKeys(fn ($key) => [$key => true]),
             ],
             'toast' => session('toast'),
+            'ziggy' => [
+                'route_name' => Route::currentRouteName(),
+            ],
         ]);
     }
 }
