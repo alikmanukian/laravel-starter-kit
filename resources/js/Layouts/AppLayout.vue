@@ -170,7 +170,7 @@ const logout = () => {
                                                             >
                                                                 <svg
                                                                     v-if="
-                                                                        team.id ==
+                                                                        team.id ===
                                                                         $page
                                                                             .props
                                                                             .auth
