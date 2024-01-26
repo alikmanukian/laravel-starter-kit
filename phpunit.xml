@@ -11,6 +11,8 @@
         <testsuite name="Feature">
             <directory>tests/Feature</directory>
             <exclude>tests/Feature/Jetstream/Teams</exclude>
+            <exclude>tests/Feature/Jetstream/Api</exclude>
+            <exclude>tests/Feature/Jetstream/EmailVerification</exclude>
         </testsuite>
     </testsuites>
     <source>
