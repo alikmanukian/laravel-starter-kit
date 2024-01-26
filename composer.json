@@ -34,6 +34,7 @@
         "pestphp/pest-plugin-stressless": "^2.2",
         "pestphp/pest-plugin-type-coverage": "^2.8",
         "phpunit/phpunit": "^10.1",
+        "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^2.0",
         "spatie/laravel-ray": "^1.33"
     },
@@ -71,7 +72,7 @@
             "./vendor/bin/phpstan analyse --memory-limit=-1"
         ],
         "test": [
-            "./vendor/bin/pest --parallel --compact --exclude-group=production"
+            "./vendor/bin/pest --parallel --compact --exclude-group=production,stress"
         ],
         "test:all": [
             "./vendor/bin/pest"
