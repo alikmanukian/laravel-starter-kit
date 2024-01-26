@@ -25,8 +25,13 @@
         "larastan/larastan": "^2.0",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.18",
-        "mockery/mockery": "^1.4.4",
+        "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^7.0",
+        "pestphp/pest": "^2.32",
+        "pestphp/pest-plugin-drift": "^2.5",
+        "pestphp/pest-plugin-laravel": "^2.2",
+        "pestphp/pest-plugin-stressless": "^2.2",
+        "pestphp/pest-plugin-type-coverage": "^2.8",
         "phpunit/phpunit": "^10.1",
         "spatie/laravel-ignition": "^2.0",
         "spatie/laravel-ray": "^1.33"
@@ -62,7 +67,28 @@
             "npm run lint"
         ],
         "analyze": [
-            "./vendor/bin/phpstan analyse --memory-limit=512M"
+            "./vendor/bin/phpstan analyse --memory-limit=-1"
+        ],
+        "test": [
+            "./vendor/bin/pest --parallel --compact --exclude-group=production"
+        ],
+        "test:all": [
+            "./vendor/bin/pest"
+        ],
+        "test:profile": [
+            "./vendor/bin/pest --profile"
+        ],
+        "test:failed": [
+            "./vendor/bin/pest --retry"
+        ],
+        "test:stress": [
+            "./vendor/bin/pest --compact --group=stress"
+        ],
+        "test:coverage": [
+            "./vendor/bin/pest --coverage --memory-limit=-1"
+        ],
+        "type-coverage":  [
+            "./vendor/bin/pest --type-coverage --memory-limit=-1"
         ]
     },
     "extra": {
