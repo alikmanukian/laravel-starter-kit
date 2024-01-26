@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use App\Http\Resources\UserResource;
@@ -39,11 +41,12 @@ class HandleInertiaRequests extends Middleware
             'config' => config()->get([
                 'app.name',
                 'app.locale',
+                'app.env',
             ]),
             'auth' => [
                 'user' => $request->user() ? UserResource::make($request->user()) : null,
                 'features' => collect(config('fortify.features'))
-                    ->mapWithKeys(fn ($key) => [$key => true]),
+                    ->mapWithKeys(fn (string $key) => [$key => true]),
             ],
             'toast' => session('toast'),
             'ziggy' => [

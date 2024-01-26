@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions\Jetstream;
 
 use App\Models\Team;
@@ -16,7 +18,7 @@ class DeleteUser implements DeletesUsers
      *
      * @var \Laravel\Jetstream\Contracts\DeletesTeams
      */
-    protected $deletesTeams;
+    protected DeletesTeams $deletesTeams;
 
     /**
      * Create a new action instance.
