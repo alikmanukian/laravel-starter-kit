@@ -9,6 +9,7 @@ defineOptions({ layout: [Blank, Default] })
 <template>
     <Head title="Starter Kit" />
     <div class="max-w-5xl mx-auto p-8">
+        <h2 class="text-2xl my-4">Inertia Modals</h2>
         <div class="space-y-4 w-60">
             <Link
                 :href="route('modal', { type: 'HeadlessUIModal' })"

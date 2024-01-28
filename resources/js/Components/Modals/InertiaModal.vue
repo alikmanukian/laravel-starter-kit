@@ -12,6 +12,10 @@ defineProps({
         type: Boolean,
         default: false,
     },
+    fullscreen: {
+        type: Boolean,
+        default: false,
+    },
 })
 
 // methods
@@ -36,10 +40,17 @@ const { show, close, redirect } = useModal()
                 </div>
             </TransitionChild>
 
-            <div class="fixed inset-4 overflow-y-auto transition-opacity">
+            <div
+                class="fixed overflow-y-auto transition-opacity"
+                :class="{ 'inset-4': !fullscreen, 'inset-0': fullscreen }"
+            >
                 <div
-                    class="flex justify-center"
-                    :class="{ 'items-center min-h-full': centered }"
+                    class="flex"
+                    :class="{
+                        'items-center min-h-full': centered,
+                        'justify-center': !fullscreen,
+                        'min-h-full': fullscreen,
+                    }"
                 >
                     <TransitionChild
                         as="template"
@@ -50,9 +61,7 @@ const { show, close, redirect } = useModal()
                         leave-from="opacity-100 translate-y-0 sm:scale-100"
                         leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <DialogPanel
-                            class="transform overflow-hidden align-middle transition-all"
-                        >
+                        <DialogPanel as="template">
                             <slot />
                         </DialogPanel>
                     </TransitionChild>

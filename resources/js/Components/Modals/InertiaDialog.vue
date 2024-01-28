@@ -4,8 +4,8 @@ import InertiaModal from '@/Components/Modals/InertiaModal.vue'
 
 <template>
     <InertiaModal>
-        <div v-bind="$attrs" class="overflow-hidden">
-            <div class="px-6 py-4">
+        <div v-bind="$attrs" class="overflow-hidden flex flex-col">
+            <div class="px-6 py-4 flex-1">
                 <div class="text-lg font-medium text-gray-900">
                     <slot name="title" />
                 </div>
