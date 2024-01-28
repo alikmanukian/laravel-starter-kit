@@ -1,5 +1,9 @@
 <?php
 
+use App\Logging\LogtailLogger;
+use App\Logging\TelegramLogger;
+use Logtail\Monolog\LogtailHandler;
+use Monolog\Handler\FilterHandler;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
@@ -82,6 +86,17 @@ return [
             'replace_placeholders' => true,
         ],
 
+        'telegram' => [
+            'driver' => 'monolog',
+            'handler' => FilterHandler::class,
+            'level' => env('LOG_LEVEL', 'debug'),
+            'token' => env('LOG_TELEGRAM_TOKEN'),
+            'chat_id' => env('LOG_TELEGRAM_CHAT_ID'),
+            'with' => [
+                'handler' => fn() => app(TelegramLogger::class),
+            ]
+        ],
+
         'papertrail' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
@@ -92,6 +107,17 @@ return [
                 'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
             ],
             'processors' => [PsrLogMessageProcessor::class],
+        ],
+
+        'logtail' => [
+            // url: https://logs.betterstack.com
+            'driver' => 'monolog',
+            'handler' => FilterHandler::class,
+            'level' => env('LOG_LEVEL', 'debug'),
+            'source_token' => env('LOG_LOGTAIL_SOURCE_TOKEN'),
+            'with' => [
+                'handler' => fn() => app(LogtailHandler::class),
+            ]
         ],
 
         'stderr' => [
