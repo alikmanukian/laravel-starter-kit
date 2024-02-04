@@ -17,7 +17,8 @@
         ],
         "baseUrl": "resources",
         "paths": {
-            "@/*": ["js/*"]
+            "@/*": ["js/*"],
+            "@assets/*": ["assets/*"]
         }
     },
     "include": [
