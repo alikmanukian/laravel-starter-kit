@@ -22,9 +22,13 @@ import SecondaryButton from '@/Components/Forms/SecondaryButton.vue'
             </p>
         </template>
 
-        <template #footer>
-            <SecondaryButton tabindex="2"> Cancel </SecondaryButton>
-            <PrimaryButton class="ms-3" tabindex="1"> Save </PrimaryButton>
+        <template #footer="{ close }">
+            <SecondaryButton tabindex="2" @click="close">
+                Cancel
+            </SecondaryButton>
+            <PrimaryButton class="ms-3" tabindex="1" @click="close">
+                Save
+            </PrimaryButton>
         </template>
     </InertiaDialog>
 </template>

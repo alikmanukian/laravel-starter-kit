@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, nextTick } from 'vue'
-import DialogModal from '@/Components/Modals/Dialog.vue'
+import DialogModal from '@/Components/Modals/Jetstream/Dialog.vue'
 import InputError from '@/Components/Forms/InputError.vue'
 import PrimaryButton from '@/Components/Forms/PrimaryButton.vue'
 import SecondaryButton from '@/Components/Forms/SecondaryButton.vue'

@@ -8,6 +8,7 @@ import DropdownLink from '@/Components/Common/DropdownLink.vue'
 import NavLink from '@/Components/App/NavLink.vue'
 import ResponsiveNavLink from '@/Components/App/ResponsiveNavLink.vue'
 import Container from '@/Components/App/Container.vue'
+import BlankLayout from '@/Layouts/Blank.vue'
 
 const page = usePage()
 
@@ -52,7 +53,7 @@ const menu = [
 </script>
 
 <template>
-    <div>
+    <BlankLayout>
         <Head :title="title" />
 
         <Banner />
@@ -542,5 +543,5 @@ const menu = [
                 <slot />
             </main>
         </div>
-    </div>
+    </BlankLayout>
 </template>

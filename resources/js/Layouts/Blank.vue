@@ -1,10 +1,10 @@
 <script setup>
-import { Modal } from 'momentum-modal'
+import { Modal as MomentumModal } from 'momentum-modal'
 import Toast from '@/Components/Common/Toast.vue'
 </script>
 
 <template>
     <slot />
-    <Modal />
+    <MomentumModal />
     <Toast />
 </template>

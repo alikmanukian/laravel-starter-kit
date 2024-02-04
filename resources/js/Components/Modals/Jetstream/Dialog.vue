@@ -1,5 +1,5 @@
 <script setup>
-import Modal from '@/Components/Modals/Modal.vue'
+import Modal from '@/Components/Modals/Jetstream/Modal.vue'
 
 const emit = defineEmits(['close'])
 

@@ -1,5 +1,5 @@
 ## Svg icons usage
-```html
+```vue
 <script setup>
 import SvgIcon from '@/Components/Common/SvgIcon.vue'
 </script>
