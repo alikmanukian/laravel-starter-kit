@@ -10,11 +10,12 @@ import {
     MenuItems,
 } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import Container from '@/Components/App/Container.vue'
 </script>
 
 <template>
-    <Disclosure v-slot="{ open }" as="nav" class="border-b border-b-slate-200">
-        <div class="mx-auto max-w-5xl px-8">
+    <Disclosure v-slot="{ open }" as="nav" class="border-b border-b-slate-200 mb-4">
+        <Container>
             <div class="flex h-16 justify-between relative">
                 <div class="flex grow">
                     <div class="flex items-center sm:mr-6">
@@ -32,6 +33,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
                                 Home
                             </Link>
                             <Link
+                                v-if="$page.props.auth.user"
                                 :href="route('dashboard')"
                                 class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900"
                             >
@@ -123,7 +125,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
                     </DisclosureButton>
                 </div>
             </div>
-        </div>
+        </Container>
         <DisclosurePanel class="sm:hidden">
             <div class="space-y-1 pb-3">
                 <Link
@@ -133,6 +135,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
                     Home
                 </Link>
                 <Link
+                    v-if="$page.props.auth.user"
                     :href="route('dashboard')"
                     class="block py-2 px-8 font-medium text-gray-900"
                 >
@@ -141,13 +144,14 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
             </div>
             <div v-if="!$page.props.auth.user" class="space-y-1 pb-3">
                 <Link
-                    v-if="$page.props.auth.features.registration"
+                    v-if="$page.props.auth.features.registration && !$page.props.auth.user"
                     :href="route('register')"
                     class="block py-2 px-8 font-medium text-gray-900"
                 >
                     Create an account
                 </Link>
                 <Link
+                    v-if="!$page.props.auth.user"
                     :href="route('login')"
                     class="block py-2 px-8 font-medium text-gray-900"
                 >

@@ -1,29 +1,24 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3'
-import Blank from '@/Layouts/Blank.vue'
-import Default from '@/Layouts/Default.vue'
-
-defineOptions({ layout: [Blank, Default] })
+import Container from '@/Components/App/Container.vue'
+import AppLayout from '@/Layouts/AppLayout.vue'
 </script>
 
 <template>
-    <Head title="Starter Kit" />
-    <div class="max-w-5xl mx-auto p-8">
-        <h2 class="text-2xl my-4">Inertia Modals</h2>
-        <div class="space-y-4 w-60">
-            <Link
-                :href="route('modal', { type: 'HeadlessUIModal' })"
-                class="bg-slate-600 text-white rounded px-4 py-2 block text-center"
-            >
-                Open HeadlessUI Modal
-            </Link>
+    <AppLayout title="Home">
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Home
+            </h2>
+        </template>
 
-            <Link
-                :href="route('modal', { type: 'HeadlessUIDialog' })"
-                class="bg-orange-600 text-white rounded px-4 py-2 block text-center"
-            >
-                Open HeadlessUI Dialog
-            </Link>
+        <div class="py-12">
+            <Container>
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="p-6 lg:p-8 bg-white">
+                        Home Content
+                    </div>
+                </div>
+            </Container>
         </div>
-    </div>
+    </AppLayout>
 </template>

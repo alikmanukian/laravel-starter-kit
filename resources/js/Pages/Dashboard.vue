@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
-import Welcome from '@/Components/App/Welcome.vue'
+import Container from '@/Components/App/Container.vue'
 </script>
 
 <template>
@@ -12,11 +12,13 @@ import Welcome from '@/Components/App/Welcome.vue'
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <Container>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
+                    <div class="p-6 lg:p-8 bg-white">
+                        Dashboard Content
+                    </div>
                 </div>
-            </div>
+            </Container>
         </div>
     </AppLayout>
 </template>

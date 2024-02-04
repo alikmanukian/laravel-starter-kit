@@ -1,6 +1,7 @@
 <script setup>
 import ApiTokenManager from '@/Pages/API/Partials/ApiTokenManager.vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
+import Container from '@/Components/App/Container.vue'
 
 defineProps({
     tokens: {
@@ -27,13 +28,13 @@ defineProps({
         </template>
 
         <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <Container class="py-10">
                 <ApiTokenManager
                     :tokens="tokens"
                     :available-permissions="availablePermissions"
                     :default-permissions="defaultPermissions"
                 />
-            </div>
+            </Container>
         </div>
     </AppLayout>
 </template>

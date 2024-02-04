@@ -1,12 +1,15 @@
 <script setup>
 import { ref } from 'vue'
-import { Head, Link, router } from '@inertiajs/vue3'
+import { Head, Link, router, usePage } from '@inertiajs/vue3'
 import ApplicationMark from '@/Components/App/ApplicationMark.vue'
 import Banner from '@/Components/App/Banner.vue'
 import Dropdown from '@/Components/Common/Dropdown.vue'
 import DropdownLink from '@/Components/Common/DropdownLink.vue'
 import NavLink from '@/Components/App/NavLink.vue'
 import ResponsiveNavLink from '@/Components/App/ResponsiveNavLink.vue'
+import Container from '@/Components/App/Container.vue'
+
+const page = usePage()
 
 defineProps({
     title: {
@@ -32,6 +35,20 @@ const switchToTeam = (team) => {
 const logout = () => {
     router.post(route('logout'))
 }
+
+const menu = [
+    {
+        name: 'Home',
+        href: route('home'),
+        current: route().current('home'),
+    },
+    {
+        name: 'Dashboard',
+        href: route('dashboard'),
+        current: route().current('dashboard'),
+        show: page.props.auth.user,
+    },
+]
 </script>
 
 <template>
@@ -48,7 +65,7 @@ const logout = () => {
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
+                                <Link :href="route('home')">
                                     <ApplicationMark class="block h-9 w-auto" />
                                 </Link>
                             </div>
@@ -57,17 +74,20 @@ const logout = () => {
                             <div
                                 class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
-                                <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
-                                >
-                                    Dashboard
-                                </NavLink>
+                                <template v-for="item in menu" :key="item.name">
+                                    <NavLink
+                                        v-if="item.show || item.show === undefined"
+                                        :href="item.href"
+                                        :active="item.current"
+                                    >
+                                        {{ item.name }}
+                                    </NavLink>
+                                </template>
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
-                            <div class="ms-3 relative">
+                            <div class="ms-3 relative empty:hidden">
                                 <!-- Teams Dropdown -->
                                 <Dropdown
                                     v-if="$page.props.jetstream.hasTeamFeatures"
@@ -206,9 +226,14 @@ const logout = () => {
                                 </Dropdown>
                             </div>
 
-                            <!-- Settings Dropdown -->
-                            <div class="ms-3 relative">
-                                <Dropdown align="right" width="48">
+                            <div class="ms-3 relative empty:hidden">
+                                <!-- Login/Register links -->
+                                <div class="space-x-4" v-if="!$page.props.auth.user">
+                                    <Link :href="route('login')" class="text-gray-500 hover:text-gray-900">Login</Link>
+                                    <Link :href="route('register')" class="text-gray-500 hover:text-gray-900">Register</Link>
+                                </div>
+                                <!-- Settings Dropdown -->
+                                <Dropdown align="right" width="48" v-if="$page.props.auth.user">
                                     <template #trigger>
                                         <button
                                             v-if="
@@ -346,16 +371,24 @@ const logout = () => {
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
+                        <template v-for="item in menu" :key="item.name">
+                            <ResponsiveNavLink
+                                v-if="item.show || item.show === undefined"
+                                :href="item.href"
+                                :active="item.current"
+                            >
+                                {{ item.name }}
+                            </ResponsiveNavLink>
+                        </template>
+                        <!-- Login/Register links -->
+                        <div v-if="!$page.props.auth.user">
+                            <ResponsiveNavLink :href="route('login')" :active="route().current('login')">Login</ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('register')" :active="route().current('register')">Register</ResponsiveNavLink>
+                        </div>
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
+                    <div class="pt-4 pb-1 border-t border-gray-200" v-if="$page.props.auth.user">
                         <div class="flex items-center px-4">
                             <div
                                 v-if="
@@ -499,9 +532,9 @@ const logout = () => {
 
             <!-- Page Heading -->
             <header v-if="$slots.header" class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                <Container class="py-6 px-4">
                     <slot name="header" />
-                </div>
+                </Container>
             </header>
 
             <!-- Page Content -->
