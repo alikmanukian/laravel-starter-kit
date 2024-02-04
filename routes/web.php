@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModalController;
 use Illuminate\Support\Facades\Route;
 
+require __DIR__.'/fortify.php';
+
 Route::get('/', HomeController::class)->name('home');
 
 // show modal example
@@ -17,5 +19,3 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 });
-
-require __DIR__.'/fortify.php';

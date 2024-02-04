@@ -14,12 +14,12 @@ class TelegramLogger extends TelegramBotHandler
         // reformat the message to be sent to Telegram
         $msg = $record->formatted;
 
-        $msg .= PHP_EOL .
-            $this->getEnv() .
-            $this->getProject() .
-            $this->getUrl() .
-            $this->getUser() .
-            $this->getIp() .
+        $msg .= PHP_EOL.
+            $this->getEnv().
+            $this->getProject().
+            $this->getUrl().
+            $this->getUser().
+            $this->getIp().
             $this->getLine();
 
         $this->send($msg);
@@ -27,27 +27,29 @@ class TelegramLogger extends TelegramBotHandler
 
     private function getUrl(): string
     {
-        return request() ? "URL: " . request()?->fullUrl() . PHP_EOL : '';
+        // @phpstan-ignore-next-line
+        return request() ? 'URL: '.request()?->fullUrl().PHP_EOL : '';
     }
 
     private function getEnv(): string
     {
-        return "ENV: " . config('app.env') . PHP_EOL;
+        return 'ENV: '.config('app.env').PHP_EOL;
     }
 
     private function getProject(): string
     {
-        return "PROJECT: " . config('app.name') . PHP_EOL;
+        return 'PROJECT: '.config('app.name').PHP_EOL;
     }
 
     private function getUser(): string
     {
-        return auth()->user() ? "USER_ID: " . auth()->id() . PHP_EOL : '';
+        return auth()->user() ? 'USER_ID: '.auth()->id().PHP_EOL : '';
     }
 
     private function getIp(): string
     {
-        return request() ? "IP: " . request()?->ip() . PHP_EOL : '';
+        // @phpstan-ignore-next-line
+        return request() ? 'IP: '.request()?->ip().PHP_EOL : '';
     }
 
     private function getLine(): string

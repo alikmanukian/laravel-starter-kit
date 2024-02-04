@@ -24,11 +24,14 @@ class TestingServiceProvider extends ServiceProvider
         }
 
         AssertableInertia::macro('equal', function (string $key, mixed $value) {
+            /** @var AssertableInertia $this */
             $this->has($key);
 
             if ($value instanceof JsonResource) {
+                // @phpstan-ignore-next-line
                 expect($this->prop($key))->toEqual($value->resolve());
             } else {
+                // @phpstan-ignore-next-line
                 expect($this->prop($key))->toEqual($value);
             }
 
@@ -36,22 +39,31 @@ class TestingServiceProvider extends ServiceProvider
         });
 
         AssertableInertia::macro('hasResource', function (string $key, JsonResource $resource) {
+            /** @var AssertableInertia $this */
             $this->has($key);
+            // @phpstan-ignore-next-line
             expect($this->prop($key))->toEqual($resource->resolve());
 
             return $this;
         });
 
         AssertableInertia::macro('hasResourceCollection', function (string $key, ResourceCollection $resource) {
+            /** @var AssertableInertia $this */
+            // @phpstan-ignore-next-line
             return $this->hasResource($key, $resource);
         });
 
         AssertableInertia::macro('hasPaginatedResource', function (string $key, ResourceCollection $resource) {
+            /** @var AssertableInertia $this */
+            // @phpstan-ignore-next-line
             expect($this->prop($key))->toHaveKeys(['data', 'links', 'meta']);
+
+            // @phpstan-ignore-next-line
             return $this->hasResource("{$key}.data", $resource);
         });
 
         TestResponse::macro('assertInertiaComponent', function (string $component, array $params = []) {
+            /** @var TestResponse $this */
             return $this->assertInertia(function (AssertableInertia $inertia) use ($component, $params) {
                 $itertia = $inertia->component($component, true);
 
@@ -61,7 +73,8 @@ class TestingServiceProvider extends ServiceProvider
                     return $itertia->hasAll($params);
                 }
 
-                foreach($params as $key => $value) {
+                foreach ($params as $key => $value) {
+                    // @phpstan-ignore-next-line
                     $itertia->equal($key, $value);
                 }
 
@@ -70,18 +83,26 @@ class TestingServiceProvider extends ServiceProvider
         });
 
         TestResponse::macro('assertHasInertiaResource', function (string $key, JsonResource $resource) {
-            return $this->assertInertia(fn(AssertableInertia $inertia) => $inertia->hasResource($key, $resource));
+            /** @var TestResponse $this */
+            return $this->assertInertia(
+                // @phpstan-ignore-next-line
+                fn (AssertableInertia $inertia) => $inertia->hasResource($key, $resource)
+            );
         });
 
         TestResponse::macro('assertHasInertiaResourceCollection', function (string $key, ResourceCollection $resource) {
+            /** @var TestResponse $this */
             return $this->assertInertia(
-                fn(AssertableInertia $inertia) => $inertia->hasResourceCollection($key, $resource)
+                // @phpstan-ignore-next-line
+                fn (AssertableInertia $inertia) => $inertia->hasResourceCollection($key, $resource)
             );
         });
 
         TestResponse::macro('assertHasInertiaPaginatedResource', function (string $key, ResourceCollection $resource) {
+            /** @var TestResponse $this */
             return $this->assertInertia(
-                fn(AssertableInertia $inertia) => $inertia->hasPaginatedResource($key, $resource)
+                // @phpstan-ignore-next-line
+                fn (AssertableInertia $inertia) => $inertia->hasPaginatedResource($key, $resource)
             );
         });
     }

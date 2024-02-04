@@ -13,7 +13,7 @@ it('should return the correct component', function () {
 
     get(route('dashboard'))
         ->assertOk()
-        ->assertInertia(fn(AssertableInertia $inertia) => $inertia
+        ->assertInertia(fn (AssertableInertia $inertia) => $inertia
             ->component('Dashboard', true)
         );
 });

@@ -1,6 +1,5 @@
 <?php
 
-use App\Logging\LogtailLogger;
 use App\Logging\TelegramLogger;
 use Logtail\Monolog\LogtailHandler;
 use Monolog\Handler\FilterHandler;
@@ -93,8 +92,8 @@ return [
             'token' => env('LOG_TELEGRAM_TOKEN'),
             'chat_id' => env('LOG_TELEGRAM_CHAT_ID'),
             'with' => [
-                'handler' => fn() => app(TelegramLogger::class),
-            ]
+                'handler' => fn () => app(TelegramLogger::class),
+            ],
         ],
 
         'papertrail' => [
@@ -116,8 +115,8 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'source_token' => env('LOG_LOGTAIL_SOURCE_TOKEN'),
             'with' => [
-                'handler' => fn() => app(LogtailHandler::class),
-            ]
+                'handler' => fn () => app(LogtailHandler::class),
+            ],
         ],
 
         'stderr' => [

@@ -6,7 +6,6 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -49,9 +48,6 @@ class HandleInertiaRequests extends Middleware
                     ->mapWithKeys(fn (string $key) => [$key => true]),
             ],
             'toast' => session('toast'),
-            'ziggy' => [
-                'route_name' => Route::currentRouteName(),
-            ],
         ]);
     }
 }
