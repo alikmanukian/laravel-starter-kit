@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3'
-import AuthenticationCard from '@/Components/App/AuthenticationCard.vue'
-import AuthenticationCardLogo from '@/Components/App/AuthenticationCardLogo.vue'
+import AuthLayout from '@/Layouts/AuthLayout.vue'
 import Checkbox from '@/Components/Forms/Checkbox.vue'
 import InputError from '@/Components/Forms/InputError.vue'
 import InputLabel from '@/Components/Forms/InputLabel.vue'
@@ -26,11 +25,7 @@ const submit = () => {
 <template>
     <Head title="Register" />
 
-    <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
-
+    <AuthLayout>
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="Name" />
@@ -142,5 +137,5 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
-    </AuthenticationCard>
+    </AuthLayout>
 </template>

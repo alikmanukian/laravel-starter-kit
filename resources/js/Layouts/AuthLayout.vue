@@ -1,9 +1,15 @@
+<script setup>
+import { Link } from '@inertiajs/vue3'
+</script>
+
 <template>
     <div
         class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
     >
         <div>
-            <slot name="logo" />
+            <Link :href="route('home')">
+                <img src="/images/icons/svg/jetstream-logo.svg" class="w-16 h-16" />
+            </Link>
         </div>
 
         <div

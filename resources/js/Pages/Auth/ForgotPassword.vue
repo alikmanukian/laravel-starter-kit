@@ -1,7 +1,6 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3'
-import AuthenticationCard from '@/Components/App/AuthenticationCard.vue'
-import AuthenticationCardLogo from '@/Components/App/AuthenticationCardLogo.vue'
+import AuthLayout from '@/Layouts/AuthLayout.vue'
 import InputError from '@/Components/Forms/InputError.vue'
 import InputLabel from '@/Components/Forms/InputLabel.vue'
 import PrimaryButton from '@/Components/Forms/PrimaryButton.vue'
@@ -26,11 +25,7 @@ const submit = () => {
 <template>
     <Head title="Forgot Password" />
 
-    <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
-
+    <AuthLayout>
         <div class="mb-4 text-sm text-gray-600">
             Forgot your password? No problem. Just let us know your email
             address and we will email you a password reset link that will allow
@@ -65,5 +60,5 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
-    </AuthenticationCard>
+    </AuthLayout>
 </template>

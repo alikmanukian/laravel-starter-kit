@@ -1,7 +1,6 @@
 <script setup>
 import { Head, Link, useForm } from '@inertiajs/vue3'
-import AuthenticationCard from '@/Components/App/AuthenticationCard.vue'
-import AuthenticationCardLogo from '@/Components/App/AuthenticationCardLogo.vue'
+import AuthLayout from '@/Layouts/AuthLayout.vue'
 import Checkbox from '@/Components/Forms/Checkbox.vue'
 import InputError from '@/Components/Forms/InputError.vue'
 import InputLabel from '@/Components/Forms/InputLabel.vue'
@@ -35,11 +34,7 @@ const submit = () => {
 <template>
     <Head title="Log in" />
 
-    <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
-
+    <AuthLayout>
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
         </div>
@@ -97,5 +92,5 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
-    </AuthenticationCard>
+    </AuthLayout>
 </template>

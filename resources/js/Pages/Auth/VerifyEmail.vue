@@ -1,8 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { Head, Link, useForm } from '@inertiajs/vue3'
-import AuthenticationCard from '@/Components/App/AuthenticationCard.vue'
-import AuthenticationCardLogo from '@/Components/App/AuthenticationCardLogo.vue'
+import AuthLayout from '@/Layouts/AuthLayout.vue'
 import PrimaryButton from '@/Components/Forms/PrimaryButton.vue'
 
 const props = defineProps({
@@ -26,11 +25,7 @@ const verificationLinkSent = computed(
 <template>
     <Head title="Email Verification" />
 
-    <AuthenticationCard>
-        <template #logo>
-            <AuthenticationCardLogo />
-        </template>
-
+    <AuthLayout>
         <div class="mb-4 text-sm text-gray-600">
             Before continuing, could you verify your email address by clicking
             on the link we just emailed to you? If you didn't receive the email,
@@ -73,5 +68,5 @@ const verificationLinkSent = computed(
                 </div>
             </div>
         </form>
-    </AuthenticationCard>
+    </AuthLayout>
 </template>
