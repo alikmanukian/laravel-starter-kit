@@ -11,10 +11,6 @@ defineOptions({ layout: [BlankLayout, AppLayout] })
 
 const showLocalModal = ref(false)
 
-const showModal = () => {
-    showLocalModal.value = true
-}
-
 const { confirmation } = useConfirm()
 
 const onConfirm = async () => {
@@ -52,7 +48,7 @@ const onConfirm = async () => {
                         <a
                             href="#"
                             class="rounded-lg py-2 px-4 bg-slate-300 hover:bg-slate-500 hover:text-white inline-block"
-                            @click.prevent.stop="showModal"
+                            @click.prevent.stop="showLocalModal = true"
                         >
                             Open modal
                         </a>
@@ -72,9 +68,11 @@ const onConfirm = async () => {
     <HeadlessModal
         class="bg-white max-w-lg shadow-xl rounded-md p-8"
         :show="showLocalModal"
+        close-on-esc
+        close-on-overlay-click
         @close="showLocalModal = false"
     >
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet
+        Test content. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet
         atque dolor, itaque, maxime minima mollitia nemo nesciunt nisi obcaecati
         odio placeat porro, quod repellat reprehenderit sequi ut voluptas!
     </HeadlessModal>

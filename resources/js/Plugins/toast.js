@@ -1,5 +1,5 @@
 import { router, usePage } from '@inertiajs/vue3'
-import useToast from '@/Composables/useToast'
+import useToast from '@/Utilities/Composables/useToast'
 
 const { toast } = useToast()
 

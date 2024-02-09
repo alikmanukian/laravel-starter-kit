@@ -1,5 +1,5 @@
 <script setup>
-import useToast from '@/Composables/useToast'
+import useToast from '@/Utilities/Composables/useToast'
 import { TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 const { body, active, hide } = useToast()

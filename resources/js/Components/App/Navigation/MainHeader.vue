@@ -8,7 +8,7 @@ import ResponsiveNavLink from '@/Components/App/Navigation/ResponsiveNavLink.vue
 import TeamSwitcher from '@/Components/App/Navigation/TeamSwitcher.vue'
 import Hamburger from '@/Components/App/Navigation/Hamburger.vue'
 import { ref } from 'vue'
-import { isAuthorized, isCurrentRoute } from '@/helpers.js'
+import { isAuthorized, isCurrentRoute } from '@/Utilities/pageGlobals.js'
 
 const showingNavigationDropdown = ref(false)
 
