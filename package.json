@@ -8,7 +8,8 @@
         "format": "prettier --write resources"
     },
     "devDependencies": {
-        "@headlessui/vue": "^1.7.17",
+        "@formkit/auto-animate": "^0.8.1",
+        "@headlessui/vue": "^1.7.19",
         "@heroicons/vue": "^2.1.1",
         "@inertiajs/vue3": "^1.0.0",
         "@tailwindcss/aspect-ratio": "^0.4.2",
@@ -24,12 +25,13 @@
         "eslint-plugin-prettier": "^5.1.3",
         "eslint-plugin-vue": "^9.20.1",
         "laravel-vite-plugin": "^1.0.0",
+        "lodash": "^4.17.21",
         "momentum-modal": "^0.2.1",
-        "postcss": "^8.4.14",
-        "prettier": "^3.2.4",
+        "postcss": "^8.4.35",
+        "prettier": "^3.2.5",
         "tailwindcss": "^3.1.0",
         "vite": "^5.0.0",
         "vite-svg-loader": "^5.1.0",
-        "vue": "^3.2.31"
+        "vue": "^3.4.18"
     }
 }
