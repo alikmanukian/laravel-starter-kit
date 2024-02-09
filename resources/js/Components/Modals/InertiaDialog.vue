@@ -22,6 +22,7 @@ const { show, close, redirect } = useModal()
         :show="show"
         :centered="centered"
         :fullscreen="fullscreen"
+        v-bind="$attrs"
         @after-leave="redirect"
         @close="close"
     >

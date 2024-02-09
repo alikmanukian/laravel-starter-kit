@@ -56,6 +56,21 @@ import InertiaModal from '@/Components/Modals/InertiaModal.vue'
 </template>
 ```
 
+To change modal behaviors for closing, use `close-on-esc`, `close-on-overlay-click` props:
+```vue
+<script setup>
+import InertiaModal from '@/Components/Modals/InertiaModal.vue'
+</script>
+
+<template>
+    <InertiaModal close-on-esc 
+                  close-on-overlay-click
+    >
+        ...
+    </InertiaModal>
+</template>
+```
+
 ## Inertia dialog example 
 
 Dialog is a modal with a header and a footer. It also has a close button in the header.
@@ -114,6 +129,21 @@ import InertiaDialog from '@/Components/Modals/InertiaDialog.vue'
 
 <template>
     <InertiaDialog fullscreen>
+        ...
+    </InertiaDialog>
+</template>
+```
+
+To change dialog behaviors for closing, use `close-on-esc`, `close-on-overlay-click` props:
+```vue
+<script setup>
+import InertiaDialog from '@/Components/Modals/InertiaDialog.vue'
+</script>
+
+<template>
+    <InertiaDialog close-on-esc 
+                    close-on-overlay-click
+    >
         ...
     </InertiaDialog>
 </template>

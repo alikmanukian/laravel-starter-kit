@@ -5,8 +5,9 @@ import {
     Dialog,
     DialogPanel,
 } from '@headlessui/vue'
+import { onMounted, onUnmounted } from 'vue'
 
-defineProps({
+const props = defineProps({
     centered: {
         type: Boolean,
         default: false,
@@ -27,18 +28,46 @@ defineProps({
         type: Function,
         default: () => {},
     },
-    close: {
-        type: Function,
-        default: () => {},
+    closeOnEsc: {
+        type: Boolean,
+        default: false,
     },
+    closeOnOverlayClick: {
+        type: Boolean,
+        default: false,
+    }
 })
 
-defineEmits(['close', 'afterLeave'])
+const emit = defineEmits(['close', 'afterLeave'])
+
+const onClickOverlay = () => {
+    if (props.closeOnOverlayClick) {
+        emit('close')
+    }
+}
+
+const onEscape = (e) => {
+    if (e.key === 'Escape') {
+        emit('close')
+    }
+}
+
+onMounted(() => {
+    if (props.closeOnEsc) {
+        window.addEventListener('keydown', onEscape)
+    }
+})
+
+onUnmounted(() => {
+    if (props.closeOnEsc) {
+        window.removeEventListener('keydown', onEscape)
+    }
+})
 </script>
 
 <template>
     <TransitionRoot as="template" :show="show">
-        <Dialog as="div" class="relative z-50" @close="$emit('close')">
+        <Dialog as="div" class="relative z-50">
             <TransitionChild
                 as="template"
                 enter="duration-300 ease-out"
@@ -50,12 +79,12 @@ defineEmits(['close', 'afterLeave'])
                 @after-leave="$emit('afterLeave')"
             >
                 <div class="fixed inset-0 transform transition-all">
-                    <div class="absolute inset-0 bg-gray-500 opacity-75" />
+                    <div class="absolute inset-0 bg-gray-500 opacity-75" @click="onClickOverlay" />
                 </div>
             </TransitionChild>
 
             <div
-                class="fixed overflow-y-auto transition-opacity"
+                class="fixed overflow-y-auto transition-opacity pointer-events-none"
                 :class="{ 'inset-4': !fullscreen, 'inset-0': fullscreen }"
             >
                 <div
@@ -78,6 +107,7 @@ defineEmits(['close', 'afterLeave'])
                         <DialogPanel
                             v-bind="$attrs"
                             :class="{ 'w-full min-w-full': fullscreen }"
+                            class="pointer-events-auto"
                         >
                             <slot />
                         </DialogPanel>
