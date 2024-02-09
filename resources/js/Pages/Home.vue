@@ -5,6 +5,9 @@ import HeadlessModal from '@/Components/Modals/HeadlessModal.vue'
 import { ref } from 'vue'
 import BlankLayout from '@/Layouts/BlankLayout.vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
+import { useConfirm } from '@/Utilities/Composables/useConfirm'
+
+defineOptions({ layout: [BlankLayout, AppLayout] })
 
 const showLocalModal = ref(false)
 
@@ -12,7 +15,17 @@ const showModal = () => {
     showLocalModal.value = true
 }
 
-defineOptions({ layout: [BlankLayout, AppLayout] })
+const { confirmation } = useConfirm()
+
+const onConfirm = async () => {
+    if (
+        !(await confirmation('Are you sure you want to confirm this action?'))
+    ) {
+        return
+    }
+
+    alert('Confirmed')
+}
 </script>
 
 <template>
@@ -32,7 +45,7 @@ defineOptions({ layout: [BlankLayout, AppLayout] })
                         </Link>
                         <Link
                             :href="route('modal', 'Dialog')"
-                            class="rounded-lg py-2 px-4 bg-red-300 hover:bg-red-500 hover:text-white inline-block"
+                            class="rounded-lg py-2 px-4 bg-orange-300 hover:bg-orange-500 hover:text-white inline-block"
                         >
                             Open momentum dialog
                         </Link>
@@ -43,6 +56,13 @@ defineOptions({ layout: [BlankLayout, AppLayout] })
                         >
                             Open modal
                         </a>
+
+                        <button
+                            class="rounded-lg py-2 px-4 bg-red-300 hover:bg-red-500 hover:text-white inline-block"
+                            @click="onConfirm"
+                        >
+                            Open Confirmation
+                        </button>
                     </div>
                 </div>
             </div>
