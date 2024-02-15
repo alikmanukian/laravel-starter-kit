@@ -19,6 +19,10 @@ export default (app) => {
         router.on('finish', () => {
             const error = usePage().props.flash.error
 
+            if (!error) {
+                return
+            }
+
             switch (error.code) {
                 case 401: // eslint-disable-line
                     return router.visit(route('login')) // eslint-disable-line
