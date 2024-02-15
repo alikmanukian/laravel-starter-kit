@@ -10,3 +10,10 @@
 .grecaptcha-badge {
     visibility: hidden !important;
 }
+
+.Vue-Toastification__slideBlurred-enter-active {
+    animation-duration: 450ms;
+}
+.Vue-Toastification__slideBlurred-move {
+    transition-duration: 200ms;
+}

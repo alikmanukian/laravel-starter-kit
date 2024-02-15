@@ -6,6 +6,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Inertia\Middleware;
 
@@ -37,6 +38,9 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $error = Cache::get('flash.error');
+        Cache::forget('flash.error'); // in case we put not as flash message while redirects
+
         return array_merge(parent::share($request), [
             'config' => config()->get([
                 'app.name',
@@ -48,7 +52,10 @@ class HandleInertiaRequests extends Middleware
                 'features' => collect(config('fortify.features'))
                     ->mapWithKeys(fn (string $key) => [$key => true]),
             ],
-            'toast' => session('toast'),
+            'flash' => [
+                'toast' => session('toast'),
+                'error' => $error,
+            ],
             'ziggy' => [
                 'route_name' => Route::currentRouteName(),
             ],
