@@ -19,6 +19,7 @@ yarn-error.log
 /.vscode
 /packages
 .phpactor.json
+.DS_Store
 
 /caddy
 frankenphp

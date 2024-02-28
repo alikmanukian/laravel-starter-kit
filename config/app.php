@@ -190,4 +190,9 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'log' => [
+        'slow_query_interval_in_seconds' => env('LOG_SLOW_QUERIES_INTERVAL_IN_SECONDS', 5),
+        'long_running_queries_interval_per_connection_in_seconds' => env('LOG_LONG_RUNNING_QUERIES_PER_CONNECTION_INTERVAL_IN_SECONDS', 60),
+    ],
+
 ];

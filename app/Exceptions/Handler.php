@@ -41,8 +41,8 @@ class Handler extends ExceptionHandler
     {
         $response = parent::render($request, $e);
 
-        if ($response = $this->handleJsonErrors($request, $e, $response)) {
-            return $response;
+        if ($jsonResponse = $this->handleJsonErrors($request, $e, $response)) {
+            return $jsonResponse;
         }
 
         return $response;
@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
         }
 
         try {
-            $status = $e->statusCode ?? $response->getStatusCode();
+            $status = method_exists($e, 'getStatusCode') ? $e->getStatusCode() : $response->getStatusCode();
         } catch (Throwable) {
             $status = $response->getStatusCode() ?? Response::HTTP_INTERNAL_SERVER_ERROR;
         }

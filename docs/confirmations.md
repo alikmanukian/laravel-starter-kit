@@ -1,4 +1,4 @@
-# Confirmations
+## Confirmations
 ```vue
 <script setup>
 import { useConfirm } from '@/Utilities/Composables/useConfirm'

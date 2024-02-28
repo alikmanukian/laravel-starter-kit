@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 
-const model = defineModel()
+const model = defineModel()  // eslint-disable-line
 
 const input = ref(null)
 
@@ -17,7 +17,7 @@ defineExpose({ focus: () => input.value.focus() })
 <template>
     <input
         ref="input"
-        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
         v-model="model"
+        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
     />
 </template>

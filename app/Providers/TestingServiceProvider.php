@@ -23,6 +23,11 @@ class TestingServiceProvider extends ServiceProvider
             return;
         }
 
+        $this->defineInertiaAsserts();
+    }
+
+    protected function defineInertiaAsserts(): void
+    {
         AssertableInertia::macro('equal', function (string $key, mixed $value) {
             /** @var AssertableInertia $this */
             $this->has($key);
