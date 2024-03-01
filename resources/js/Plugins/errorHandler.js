@@ -24,10 +24,12 @@ export default (app) => {
             }
 
             switch (error.code) {
-                case 401: // eslint-disable-line
-                    return router.visit(route('login')) // eslint-disable-line
-                default: // eslint-disable-line
-                    break // eslint-disable-line
+                case 401:
+                    return router.visit(route('login'))
+                case 422:
+                    return
+                default:
+                    break
             }
 
             if (error) {

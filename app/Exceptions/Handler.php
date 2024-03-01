@@ -10,6 +10,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Validation\ValidationException;
+use Sentry\Laravel\Integration;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
@@ -33,7 +35,7 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+            Integration::captureUnhandledException($e);
         });
     }
 
@@ -70,6 +72,10 @@ class Handler extends ExceptionHandler
             case NotFoundHttpException::class:
                 $status = Response::HTTP_NOT_FOUND;
                 $message = $e->getMessage() ?: 'Not found';
+                break;
+            case ValidationException::class:
+                $status = Response::HTTP_UNPROCESSABLE_ENTITY;
+                $message = $e->getMessage() ?: 'Validation exception';
                 break;
             default:
                 $message = $e->getMessage() ?: 'An error occurred';
