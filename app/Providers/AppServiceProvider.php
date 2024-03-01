@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Http\Kernel;
 use App\Logging\TelegramLogger;
 use Carbon\CarbonInterval as Interval;
 use Closure;
 use DateInterval;
 use DateTimeInterface;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Routing\Events\PreparingResponse;
@@ -54,6 +56,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->loggingOnSlowDBQueries(); // log on slow database queries
 
+        $this->loggingOnSlowRequests(); // log on slow requests
+
         $this->defineCacheMacros(); // define custom cache macros
     }
 
@@ -87,6 +91,17 @@ class AppServiceProvider extends ServiceProvider
                 Log::warning("Lazy loading violation: {$query->sql}");
             }
         });
+    }
+
+    /**
+     * @throws BindingResolutionException
+     */
+    protected function loggingOnSlowRequests(): void
+    {
+        $this->app->make(Kernel::class)->whenRequestLifecycleIsLongerThan(
+            Interval::seconds($sec = config('app.log.long_running_requests_interval_in_seconds')),
+            static fn () => Log::warning("Request exceeded {$sec} seconds")
+        );
     }
 
     protected function loggingOnSlowDBQueries(): void
